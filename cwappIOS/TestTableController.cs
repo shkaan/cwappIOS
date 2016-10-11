@@ -11,30 +11,57 @@ namespace cwappIOS
     public partial class TestTableController : UITableViewController
     {
         public static NSString cellIdentifier = new NSString("MainCell");
-        // private UITableView table;
+        //private UITableView table;
         public static MainTableModel mainTableModel;
         private InitializeHttpClient httpClient;
         private StoreCredentialsToKeychain _token;
 
+        private string[] testTable = new string[] { "kurazz", "palazz", "kriminalazz" };
+
+
+
 
         public TestTableController(IntPtr handle) : base(handle)
         {
-            TableView.RegisterClassForCellReuse(typeof(MainCell), cellIdentifier);
+            //TableView.RegisterClassForCellReuse(typeof(MainCell), cellIdentifier);
+            //table.RegisterClassForCellReuse(typeof(MainCell), cellIdentifier);
 
         }
 
-        public override async void ViewDidLoad()
+        public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            await GetApiData();
-            TableView.Source = new MainTableSource(mainTableModel);
-            
+
+            GetApiData();
+            MainTableView.Source = new MainTableSource(mainTableModel);
+
+
+            //MainTableView.Source = new MainTableSource(mainTableModel);
+
+            //MainTableView.WeakDelegate = this;
+
+            //MainTableView.Source = new MainTableSource(mainTableModel);
+
+            //this.MainTableView.DataSource = new MainTableSource();
+
+            //Add(table);
+
             //ProcessData();
-            //table = new UITableView(View.Bounds);
 
             //string[] dataArray = new string[] { "kurazz", "palazz", "stojadin", "miladin", "milojca" };
 
         }
+
+        //public override void ViewWillAppear(bool animated)
+        //{
+        //    base.ViewWillAppear(animated);
+        //    MainTableView.Source = new MainTableSource(mainTableModel);
+        //}
+
+        //public override void ViewDidLayoutSubviews()
+        //{
+        //    base.ViewDidLayoutSubviews();
+        //}
 
 
 
@@ -48,7 +75,8 @@ namespace cwappIOS
 
 
 
-        private async Task GetApiData()
+        //private async Task GetApiData()
+        private void GetApiData()
         {
             httpClient = new InitializeHttpClient();
             //model = new MainTableModel();
@@ -56,13 +84,12 @@ namespace cwappIOS
 
             string queryString = GetQueryString("0", "100", _token.token);
 
-            var response = await httpClient.GetHttpClient().GetAsync("api/userEntries" + "?" + queryString);//"?token=" + _token.token);
+            var response = httpClient.GetHttpClient().GetAsync("api/userEntries" + "?" + queryString).Result;//"?token=" + _token.token);
 
             if (response.IsSuccessStatusCode)
             {
-
                 var responseContent = response.Content;
-                string jsonString = await responseContent.ReadAsStringAsync().ConfigureAwait(false);
+                string jsonString = responseContent.ReadAsStringAsync().Result;
                 mainTableModel = JsonConvert.DeserializeObject<MainTableModel>(jsonString);
                 //ProcessData(mainTableModel);
             }

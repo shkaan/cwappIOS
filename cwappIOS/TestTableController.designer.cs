@@ -14,8 +14,25 @@ namespace cwappIOS
     [Register ("TestTableController")]
     partial class TestTableController
     {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITableView MainTableView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UINavigationItem NavigationBar { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
+            if (MainTableView != null) {
+                MainTableView.Dispose ();
+                MainTableView = null;
+            }
+
+            if (NavigationBar != null) {
+                NavigationBar.Dispose ();
+                NavigationBar = null;
+            }
         }
     }
 }

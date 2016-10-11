@@ -179,10 +179,39 @@
         </scene>
         <scene sceneID="1262">
             <objects>
-                <tableViewController id="1263" sceneMemberID="viewController" customClass="TestTableController">
+                <tableViewController id="1263" sceneMemberID="viewController" customClass="TestTableController" storyboardIdentifier="TestTableController" hasRefreshControl="0">
                     <navigationItem title="Crosswords DB Main" id="1452" key="navigationItem"/>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="1457" key="view">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1458" rowHeight="60" reuseIdentifier="MainCell" customClass="MainCell">
+                                <rect key="frame" x="0.0" y="28" width="240" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1458" id="1459">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <rect key="frame" x="246" y="-303" width="240" height="128"/>
+                        </variation>
+                    </tableView>
+                    <connections>
+                        <outlet property="MainTableView" destination="1457" id="name-outlet-1457"/>
+                        <outlet property="NavigationBar" destination="1452" id="name-outlet-1452"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1269" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1455" rowHeight="44" translatesAutoresizingMaskIntoConstraints="NO">
+                    <rect key="frame" x="247" y="-376" width="240" height="44"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1455" id="1456">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </tableViewCellContentView>
+                </tableViewCell>
             </objects>
             <point key="canvasLocation" x="204" y="-534"/>
         </scene>

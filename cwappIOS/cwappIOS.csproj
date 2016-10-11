@@ -86,6 +86,9 @@
   <ItemGroup>
     <Compile Include="InitializeHttpClient.cs" />
     <Compile Include="MainCell.cs" />
+    <Compile Include="MainCell.designer.cs">
+      <DependentUpon>MainCell.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainTableModel.cs" />
     <Compile Include="MainTableSource.cs" />
     <Compile Include="SignInJsonResponse.cs" />

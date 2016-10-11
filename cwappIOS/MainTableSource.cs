@@ -9,23 +9,24 @@ namespace cwappIOS
     class MainTableSource : UITableViewSource
     {
         List<ModelFields> tableData;
-        //private string cellIdentifier = "MainCell";
-        
-
+        //string[] tableData;
 
         public MainTableSource(MainTableModel items)
         {
             tableData = items.apiData;
-
         }
 
-        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-        {
-            var cellTag = tableView.Tag;
-            new UIAlertView("Row selected: ", tableData[indexPath.Row].entryid.ToString(), null, "OK", null).Show();
-            tableView.DeselectRow(indexPath, true);
+        //public MainTableSource(string[] items)
+        //{
+        //    tableData = items;
+        //}
 
-        }
+        //public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        //{
+        //    var cellTag = tableView.Tag;
+        //    new UIAlertView("Row selected: ", tableData[indexPath.Row].entryid.ToString(), null, "OK", null).Show();
+        //    tableView.DeselectRow(indexPath, true);
+        //}
 
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -33,8 +34,8 @@ namespace cwappIOS
             //tableView.RegisterClassForCellReuse(typeof(MainCell), new NSString(cellIdentifier));
             //MainCell cell = tableView.DequeueReusableCell(cellIdentifier) as MainCell;
             var cell = (MainCell)tableView.DequeueReusableCell(TestTableController.cellIdentifier, indexPath);
-            
-            
+
+            //cell.LayoutIfNeeded();
             
             //var cell = tableView.DequeueReusableCell(MainCell.Key, indexPath);
             

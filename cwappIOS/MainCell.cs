@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Foundation;
+using System;
+using UIKit;
 
 namespace cwappIOS
 {
-    class MainCell : UIKit.UITableViewCell
+    public partial class MainCell : UITableViewCell
     {
-
-        public MainCell(IntPtr handle) : base(handle)
+        public MainCell (IntPtr handle) : base (handle)
         {
-
         }
     }
 }
