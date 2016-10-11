@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="48">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customModuleProvider="" sceneMemberID="viewController" customClass="LogInViewController" storyboardIdentifier="LogInViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="3" translatesAutoresizingMaskIntoConstraints="NO" placeholder="username" clearButtonMode="whileEditing">
+                                <rect key="frame" x="47" y="159" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" autocorrectionType="no"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="51" y="220" width="281" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="17"/>
+                                    </mask>
+                                </variation>
+                                <constraints>
+                                    <constraint id="17" firstAttribute="width" constant="281"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="17"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="7" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="3" text="Sign In" adjustsFontSizeToFit="NO">
+                                <rect key="frame" x="51" y="175" width="42" height="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="73" y="149" width="237" height="63"/>
+                                    <mask key="constraints">
+                                        <include reference="33"/>
+                                        <include reference="34"/>
+                                    </mask>
+                                </variation>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <constraints>
+                                    <constraint id="33" firstAttribute="width" constant="237"/>
+                                    <constraint id="34" firstAttribute="height" constant="63"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="33"/>
+                                        <exclude reference="34"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="8" translatesAutoresizingMaskIntoConstraints="NO" placeholder="password" clearButtonMode="whileEditing">
+                                <rect key="frame" x="51" y="268" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" autocorrectionType="no" secureTextEntry="YES"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="51" y="268" width="281" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="20"/>
+                                    </mask>
+                                </variation>
+                                <constraints>
+                                    <constraint id="20" firstAttribute="width" constant="281"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="20"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="11" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="51" y="318" width="46" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="51" y="318" width="281" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="27"/>
+                                        <include reference="28"/>
+                                    </mask>
+                                </variation>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Submit"/>
+                                <constraints>
+                                    <constraint id="27" firstAttribute="width" constant="281"/>
+                                    <constraint id="28" firstAttribute="height" constant="30"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="27"/>
+                                        <exclude reference="28"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="SubmitButton_TouchUpInside:" destination="BYZ-38-t0r" id="210" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="3"/>
+                                <exclude reference="7"/>
+                                <exclude reference="8"/>
+                                <exclude reference="11"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="15"/>
+                                <exclude reference="16"/>
+                                <exclude reference="18"/>
+                                <exclude reference="19"/>
+                                <exclude reference="25"/>
+                                <exclude reference="26"/>
+                                <exclude reference="31"/>
+                                <exclude reference="32"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="3"/>
+                                <include reference="7"/>
+                                <include reference="8"/>
+                                <include reference="11"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="15"/>
+                                <include reference="16"/>
+                                <include reference="18"/>
+                                <include reference="19"/>
+                                <include reference="25"/>
+                                <include reference="26"/>
+                                <include reference="31"/>
+                                <include reference="32"/>
+                            </mask>
+                        </variation>
+                        <constraints>
+                            <constraint id="15" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="43"/>
+                            <constraint id="16" firstItem="3" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="220"/>
+                            <constraint id="18" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="8" secondAttribute="trailing" constant="43"/>
+                            <constraint id="19" firstItem="8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="268"/>
+                            <constraint id="25" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="11" secondAttribute="trailing" constant="43"/>
+                            <constraint id="26" firstItem="11" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="318"/>
+                            <constraint id="31" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="65"/>
+                            <constraint id="32" firstItem="7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="149"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="usenameField" destination="3" id="name-outlet-3"/>
+                        <outlet property="signInLabel" destination="7" id="name-outlet-7"/>
+                        <outlet property="passwordField" destination="8" id="name-outlet-8"/>
+                        <outlet property="submitButton" destination="11" id="name-outlet-11"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-269" y="181"/>
+        </scene>
+        <scene sceneID="47">
+            <objects>
+                <navigationController id="48" sceneMemberID="viewController" storyboardIdentifier="NavigationController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="50">
+                        <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue id="1453" destination="1263" kind="relationship" relationship="rootViewController"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="51" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-267" y="-533"/>
+        </scene>
+        <scene sceneID="1262">
+            <objects>
+                <tableViewController id="1263" sceneMemberID="viewController" customClass="TestTableController">
+                    <navigationItem title="Crosswords DB Main" id="1452" key="navigationItem"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1269" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="204" y="-534"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination" type="retina47"/>
+    </simulatedMetricsContainer>
+</document>
