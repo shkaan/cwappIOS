@@ -9,54 +9,28 @@ namespace cwappIOS
     class MainTableSource : UITableViewSource
     {
         List<ModelFields> tableData;
-        //string[] tableData;
 
         public MainTableSource(MainTableModel items)
         {
             tableData = items.apiData;
         }
 
-        //public MainTableSource(string[] items)
-        //{
-        //    tableData = items;
-        //}
-
-        //public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-        //{
-        //    var cellTag = tableView.Tag;
-        //    new UIAlertView("Row selected: ", tableData[indexPath.Row].entryid.ToString(), null, "OK", null).Show();
-        //    tableView.DeselectRow(indexPath, true);
-        //}
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            var cellTag = tableView.Tag;
+            new UIAlertView("Row selected: ", tableData[indexPath.Row].entryid.ToString(), null, "OK", null).Show();
+            tableView.DeselectRow(indexPath, true);
+        }
 
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            //tableView.RegisterClassForCellReuse(typeof(MainCell), new NSString(cellIdentifier));
-            //MainCell cell = tableView.DequeueReusableCell(cellIdentifier) as MainCell;
             var cell = (MainCell)tableView.DequeueReusableCell(TestTableController.cellIdentifier, indexPath);
 
-            //cell.LayoutIfNeeded();
-            
-            //var cell = tableView.DequeueReusableCell(MainCell.Key, indexPath);
-            
-            //string question = tableData[indexPath.Row].question;
-
-            //if (cell == null)
-            //{
-                //cell = new MainCell(new NSString(cellIdentifier));
-                //cell = new MainCell(cellIdentifier);
-                //cell = new MainCell(new NSString(cellIdentifier));
-
-                //cell.TextLabel.Text = tableData[indexPath.Row].question.ToString();
-            //}
-
-            //cell.UpdateCell(tableData[indexPath.Row].question, tableData[indexPath.Row].answer);
-            cell.TextLabel.Text = tableData[indexPath.Row].question.ToString();
-            //cell.UpdateCell(tableData[indexPath.Row].question, tableData[indexPath.Row].answer);
-
+            //cell.TextLabel.Text = tableData[indexPath.Row].question.ToString();
+            cell.UpdateCell(tableData[indexPath.Row].question, tableData[indexPath.Row].answer);
 
             return cell;
-
         }
 
         //public override nint NumberOfSections(UITableView tableView)

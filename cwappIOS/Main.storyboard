@@ -191,7 +191,84 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1458" id="1459">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1461" translatesAutoresizingMaskIntoConstraints="NO">
+                                            <rect key="frame" x="20" y="12" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <rect key="frame" x="5" y="10" width="355" height="21"/>
+                                                <mask key="constraints">
+                                                    <include reference="1464"/>
+                                                </mask>
+                                            </variation>
+                                            <constraints>
+                                                <constraint id="1464" firstAttribute="width" constant="355"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="1464"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1465" translatesAutoresizingMaskIntoConstraints="NO">
+                                            <rect key="frame" x="0.0" y="32" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <rect key="frame" x="5" y="35" width="355" height="21"/>
+                                                <mask key="constraints">
+                                                    <include reference="1468"/>
+                                                </mask>
+                                            </variation>
+                                            <constraints>
+                                                <constraint id="1468" firstAttribute="width" constant="355"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="1468"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="1461"/>
+                                            <exclude reference="1465"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="1462"/>
+                                            <exclude reference="1463"/>
+                                            <exclude reference="1466"/>
+                                            <exclude reference="1467"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="1461"/>
+                                            <include reference="1465"/>
+                                        </mask>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                        <mask key="constraints">
+                                            <include reference="1462"/>
+                                            <include reference="1463"/>
+                                            <include reference="1466"/>
+                                            <include reference="1467"/>
+                                        </mask>
+                                    </variation>
+                                    <constraints>
+                                        <constraint id="1462" firstItem="1461" firstAttribute="leading" secondItem="1459" secondAttribute="leading" constant="5"/>
+                                        <constraint id="1463" firstItem="1461" firstAttribute="top" secondItem="1459" secondAttribute="top" constant="10"/>
+                                        <constraint id="1466" firstItem="1465" firstAttribute="leading" secondItem="1459" secondAttribute="leading" constant="5"/>
+                                        <constraint id="1467" firstItem="1459" firstAttribute="bottom" secondItem="1465" secondAttribute="bottom" constant="3"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="qLabel" destination="1461" id="name-outlet-1461"/>
+                                    <outlet property="aLabel" destination="1465" id="name-outlet-1465"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <variation key="heightClass=regular-widthClass=compact">

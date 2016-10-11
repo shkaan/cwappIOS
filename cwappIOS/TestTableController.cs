@@ -11,21 +11,14 @@ namespace cwappIOS
     public partial class TestTableController : UITableViewController
     {
         public static NSString cellIdentifier = new NSString("MainCell");
-        //private UITableView table;
         public static MainTableModel mainTableModel;
         private InitializeHttpClient httpClient;
         private StoreCredentialsToKeychain _token;
-
-        private string[] testTable = new string[] { "kurazz", "palazz", "kriminalazz" };
-
-
 
 
         public TestTableController(IntPtr handle) : base(handle)
         {
             //TableView.RegisterClassForCellReuse(typeof(MainCell), cellIdentifier);
-            //table.RegisterClassForCellReuse(typeof(MainCell), cellIdentifier);
-
         }
 
         public override void ViewDidLoad()
@@ -33,29 +26,18 @@ namespace cwappIOS
             base.ViewDidLoad();
 
             GetApiData();
+
             MainTableView.Source = new MainTableSource(mainTableModel);
+        }
 
-
-            //MainTableView.Source = new MainTableSource(mainTableModel);
-
-            //MainTableView.WeakDelegate = this;
-
-            //MainTableView.Source = new MainTableSource(mainTableModel);
-
-            //this.MainTableView.DataSource = new MainTableSource();
-
-            //Add(table);
-
-            //ProcessData();
-
-            //string[] dataArray = new string[] { "kurazz", "palazz", "stojadin", "miladin", "milojca" };
-
+        public override void DidReceiveMemoryWarning()
+        {
+            base.DidReceiveMemoryWarning();
         }
 
         //public override void ViewWillAppear(bool animated)
         //{
         //    base.ViewWillAppear(animated);
-        //    MainTableView.Source = new MainTableSource(mainTableModel);
         //}
 
         //public override void ViewDidLayoutSubviews()
@@ -68,9 +50,6 @@ namespace cwappIOS
         //public override void ViewDidAppear(bool animated)
         //{
         //    base.ViewDidAppear(animated);
-
-        //    //table.Source = new MainTableSource(mainTableModel);
-        //    //Add(TableView);
         //}
 
 

@@ -14,8 +14,25 @@ namespace cwappIOS
     [Register ("MainCell")]
     partial class MainCell
     {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel aLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel qLabel { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
+            if (aLabel != null) {
+                aLabel.Dispose ();
+                aLabel = null;
+            }
+
+            if (qLabel != null) {
+                qLabel.Dispose ();
+                qLabel = null;
+            }
         }
     }
 }
