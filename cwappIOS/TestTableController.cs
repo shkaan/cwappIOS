@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using CoreGraphics;
+using Foundation;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Specialized;
@@ -28,7 +29,35 @@ namespace cwappIOS
             GetApiData();
 
             MainTableView.Source = new MainTableSource(mainTableModel);
+
         }
+
+
+
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            MainTableSource.RowClicked += (object sender, EventArgs e) =>
+            {
+                //var sampleView = new UIView() as ModalView;
+                //var button = new UIButton();
+
+                //button.Frame = new CGRect(100f, 100f, 80f, 50f);
+                //button.SetTitle("Title", UIControlState.Normal);
+                //button.BackgroundColor = UIColor.Green;
+                //button.Alpha = 1;
+                ////sampleView.Frame = new CoreGraphics.CGRect(100f, 100f, 200f, 300f);
+                //sampleView.BackgroundColor = UIColor.Black;
+                //sampleView.Alpha = 0.5f;
+                //MainTableView.ScrollEnabled = false;
+                //this.View.AddSubview(sampleView);
+                //sampleView.AddSubview(button);
+               // View.AddSubview(sampleView);
+            };
+        }
+
+                
 
         public override void DidReceiveMemoryWarning()
         {
