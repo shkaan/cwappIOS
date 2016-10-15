@@ -84,14 +84,14 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="InitializeHttpClient.cs" />
+    <Compile Include="HttpClientApiMethods.cs" />
     <Compile Include="MainCell.cs" />
     <Compile Include="MainCell.designer.cs">
       <DependentUpon>MainCell.cs</DependentUpon>
     </Compile>
     <Compile Include="MainTableModel.cs" />
     <Compile Include="MainTableSource.cs" />
-    <Compile Include="SignInJsonResponse.cs" />
+    <Compile Include="ModalBackground.cs" />
     <Compile Include="LogInViewController.cs" />
     <Compile Include="LogInViewController.designer.cs">
       <DependentUpon>LogInViewController.cs</DependentUpon>
@@ -107,9 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StoreCredentialsToKeychain.cs" />
-    <Compile Include="TestTableController.cs" />
-    <Compile Include="TestTableController.designer.cs">
-      <DependentUpon>TestTableController.cs</DependentUpon>
+    <Compile Include="MainTableController.cs" />
+    <Compile Include="MainTableController.designer.cs">
+      <DependentUpon>MainTableController.cs</DependentUpon>
     </Compile>
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />

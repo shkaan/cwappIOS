@@ -44,39 +44,5 @@ namespace cwappIOS
             }
         }
 
-        public bool CheckIfTokenIsStoredAndValid(string token)
-        {
-            if (token != null)
-            {
-                InitializeHttpClient httpClient = new InitializeHttpClient();
-                try
-                {
-                    var response = httpClient.GetHttpClient().GetAsync("api/verifyToken" + "?token=" + token).Result;
-                    //response.EnsureSuccessStatusCode();
-                    if (response.IsSuccessStatusCode)
-                    {
-                    var responseContent = response.Content;
-                        string jsonString = responseContent.ReadAsStringAsync().Result;
-                        SignInJsonResponse apiResponse = JsonConvert.DeserializeObject<SignInJsonResponse>(jsonString);
-                        return apiResponse.success;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                catch (HttpRequestException)
-                {
-                    return false;
-                }
-                
-            }
-            else return false;
-        }
-
     }
-
-
-
-
 }

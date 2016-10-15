@@ -8,54 +8,84 @@ namespace cwappIOS
 {
     class MainTableSource : UITableViewSource
     {
+        public NSIndexPath currentInexPath { get; set; }
+
         List<ModelFields> tableData;
-        public static event EventHandler RowClicked = delegate { };
+
+        public List<ModelFields> TableData
+        {
+            get
+            {
+                return tableData;
+            }
+
+            set
+            {
+                tableData = value;
+            }
+        }
+
+        public static event EventHandler<ModelFields> RowClicked = delegate { };
+        public static event EventHandler<ModelFields> DeleteRowClicked = delegate { };
+        public static bool successIndicator = false;
 
         public MainTableSource(MainTableModel items)
         {
-            tableData = items.apiData;
+            TableData = items.apiData;
         }
 
-        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-        {
-
-            RowClicked(null, EventArgs.Empty);
-
-            //new UIAlertView("Row selected: ", tableData[indexPath.Row].entryid.ToString(), null, "OK", null).Show();
-            tableView.DeselectRow(indexPath, true);
-        }
 
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = (MainCell)tableView.DequeueReusableCell(TestTableController.cellIdentifier, indexPath);
+            var cell = (MainCell)tableView.DequeueReusableCell(MainTableController.cellIdentifier, indexPath);
 
-            //cell.TextLabel.Text = tableData[indexPath.Row].question.ToString();
-            cell.UpdateCell(tableData[indexPath.Row].question, tableData[indexPath.Row].answer);
+            cell.UpdateCell(TableData[indexPath.Row].question, TableData[indexPath.Row].answer);
 
             return cell;
         }
 
-        //public override nint NumberOfSections(UITableView tableView)
+
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            currentInexPath = indexPath;
+            RowClicked(this, TableData[indexPath.Row]);
+            tableView.DeselectRow(indexPath, true);
+        }
+
+        //public void UpdateModel(UpdatedDataModel updatedData)
         //{
-        //    return 1;
+        //    var forUpdate = updatedData.apiData;
+
+        //    TableData[currentInexPath.Row] = updatedData.apiData;
+
+
         //}
 
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return tableData.Count;
+            return TableData.Count;
         }
+
 
         public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
         {
             switch (editingStyle)
             {
                 case UITableViewCellEditingStyle.Delete:
-                    // remove the item from the underlying data source
-                    tableData.RemoveAt(indexPath.Row);
-                    // delete the row from the table
-                    tableView.DeleteRows(new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
+
+                    //Console.WriteLine("id is {0}", tableData[indexPath.Row].entryid);
+                    DeleteRowClicked(this, TableData[indexPath.Row]);
+                    if (successIndicator == true)
+                    {
+                        TableData.RemoveAt(indexPath.Row);
+                        tableView.DeleteRows(new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
+                    }
+                    else
+                    {
+                        new UIAlertView("Error", "Can not delete selected row.", null, "Ok", null).Show();
+                    }
                     break;
                 case UITableViewCellEditingStyle.None:
                     Console.WriteLine("CommitEditingStyle:None called");

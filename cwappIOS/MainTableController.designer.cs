@@ -12,7 +12,7 @@ using UIKit;
 namespace cwappIOS
 {
     [Register ("TestTableController")]
-    partial class TestTableController
+    partial class MainTableController
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

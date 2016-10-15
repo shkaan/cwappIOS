@@ -27,7 +27,7 @@ namespace cwappIOS
             List<KeyValuePair<string, string>> body = GetLogInFields();
             var content = new FormUrlEncodedContent(body);
 
-            InitializeHttpClient httpClient = new InitializeHttpClient();
+            HttpClientApiMethods httpClient = new HttpClientApiMethods();
             //HttpClient httpClient = GetHttpClient();
             var response = await httpClient.GetHttpClient().PostAsync("api/auth", content);
 
@@ -35,7 +35,7 @@ namespace cwappIOS
             {
                 var responseContent = response.Content;
                 string jsonString = await responseContent.ReadAsStringAsync().ConfigureAwait(false);
-                SignInJsonResponse apiResponse = JsonConvert.DeserializeObject<SignInJsonResponse>(jsonString);
+                MainTableModel apiResponse = JsonConvert.DeserializeObject<MainTableModel>(jsonString);
                 VerifyCredentials(apiResponse);
             }
 
@@ -51,7 +51,7 @@ namespace cwappIOS
             };
         }
 
-        private void VerifyCredentials(SignInJsonResponse jsonResponse)
+        private void VerifyCredentials(MainTableModel jsonResponse)
         {
             if (jsonResponse.success == true)
             {

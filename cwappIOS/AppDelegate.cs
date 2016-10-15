@@ -14,26 +14,20 @@ namespace cwappIOS
         //private bool isAuthenticated = false;
 
 
-        private bool IsAuthenticated
+        private bool isAuthenticated = false;
+
+        public bool IsAuthenticated
         {
             get
             {
-                StoreCredentialsToKeychain tokenCheck = new StoreCredentialsToKeychain();
-                return tokenCheck.CheckIfTokenIsStoredAndValid(tokenCheck.token) || false;
+                return isAuthenticated;
             }
 
-            //set
-            //{
-            //    isAuthenticated = value;
-            //}
+            set
+            {
+                isAuthenticated = value;
+            }
         }
-
-        //private bool TokenCheck()
-        //{
-        //    StoreCredentialsToKeychain tokenStore = new StoreCredentialsToKeychain();
-        //    return tokenStore.CheckIfTokenIsStoredAndValid(tokenStore.token);
-        //}
-
 
         public override UIWindow Window
         {
@@ -44,9 +38,9 @@ namespace cwappIOS
         //Public property to access our MainStoryboard.storyboard file
         public UIStoryboard MainStoryboard
         {
-
             get { return UIStoryboard.FromName("Main", NSBundle.MainBundle); }
         }
+
 
         //Creates an instance of viewControllerName from storyboard
         public UIViewController GetViewController(UIStoryboard storyboard, string viewControllerName)
@@ -62,9 +56,7 @@ namespace cwappIOS
                 var transitionType = UIViewAnimationOptions.TransitionFlipFromRight;
 
                 Window.RootViewController = rootViewController;
-                UIView.Transition(Window, 0.5, transitionType,
-                                  () => Window.RootViewController = rootViewController,
-                                  null);
+                UIView.Transition(Window, 0.5, transitionType, () => Window.RootViewController = rootViewController, null);
             }
             else
             {
@@ -76,9 +68,10 @@ namespace cwappIOS
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
-            //TokenCheck();
-            //isAuthenticated can be used for an auto-login feature, you'll have to implement this
-            //as you see fit or get rid of the if statement if you want.
+
+            //Check for token validity
+            IsAuthenticated = new HttpClientApiMethods().CheckIfTokenIsStoredAndValid();
+
             if (IsAuthenticated)
             {
                 //We are already authenticated, so go to the main tab bar controller;
