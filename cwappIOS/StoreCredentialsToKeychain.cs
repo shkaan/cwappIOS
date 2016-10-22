@@ -1,12 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using Foundation;
+using Security;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Auth;
-using System.Net.Http.Headers;
-using System.Net.Http;
 
 
 namespace cwappIOS
@@ -22,7 +17,7 @@ namespace cwappIOS
                     Username = userName
                 };
                 account.Properties.Add("token", token);
-                AccountStore.Create().Save(account, "cwappIOS");
+                AccountStore.Create().Save(account, "crossWordsDB");
             }
         }
 
@@ -30,7 +25,7 @@ namespace cwappIOS
         {
             get
             {
-                var account = AccountStore.Create().FindAccountsForService("cwappIOS").FirstOrDefault();
+                var account = AccountStore.Create().FindAccountsForService("crossWordsDB").FirstOrDefault();
                 return (account != null) ? account.Username : null;
             }
         }
@@ -39,10 +34,11 @@ namespace cwappIOS
         {
             get
             {
-                var account = AccountStore.Create().FindAccountsForService("cwappIOS").FirstOrDefault();
+                var account = AccountStore.Create().FindAccountsForService("crossWordsDB").FirstOrDefault();
                 return (account != null) ? account.Properties["token"] : null;
             }
         }
+
 
     }
 }

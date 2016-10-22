@@ -68,9 +68,10 @@ namespace cwappIOS
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
-
             //Check for token validity
-            IsAuthenticated = new HttpClientApiMethods().CheckIfTokenIsStoredAndValid();
+            IsAuthenticated = new HttpClientAndApiMethods().CheckIfTokenIsStoredAndValid();
+            //var trt = new StoreCredentialsToKeychain();
+            //var jebemiga = trt.CreateRecord("shkaanKey");
 
             if (IsAuthenticated)
             {
@@ -80,9 +81,11 @@ namespace cwappIOS
             }
             else
             {
+                //TODO: implement handler correctly
+                //new HttpClientAndApiMethods().OnLoginSuccess
                 //User needs to log in, so show the Login View Controlller
                 var loginViewController = GetViewController(MainStoryboard, "LogInViewController") as LogInViewController;
-                loginViewController.OnLoginSuccess += LoginViewController_OnLoginSuccess;
+                HttpClientAndApiMethods.OnLoginSuccess += LoginViewController_OnLoginSuccess;
                 SetRootViewController(loginViewController, false);
             }
 
@@ -92,8 +95,8 @@ namespace cwappIOS
         void LoginViewController_OnLoginSuccess(object sender, EventArgs e)
         {
             //We have successfully Logged In
-            var tabBarController = GetViewController(MainStoryboard, "NavigationController");
-            SetRootViewController(tabBarController, true);
+            var navigationController = GetViewController(MainStoryboard, "NavigationController");
+            SetRootViewController(navigationController, true);
         }
 
         public override void OnResignActivation(UIApplication application)

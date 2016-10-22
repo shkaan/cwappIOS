@@ -1,85 +1,105 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Foundation;
 using UIKit;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace cwappIOS
 {
     class MainTableSource : UITableViewSource
     {
-        public NSIndexPath currentInexPath { get; set; }
-
-        List<ModelFields> tableData;
-
-        public List<ModelFields> TableData
-        {
-            get
-            {
-                return tableData;
-            }
-
-            set
-            {
-                tableData = value;
-            }
-        }
-
+        public NSIndexPath currentIndexPath { get; set; }
+        public List<ModelFields> tableData { get; set; }
         public static event EventHandler<ModelFields> RowClicked = delegate { };
         public static event EventHandler<ModelFields> DeleteRowClicked = delegate { };
         public static bool successIndicator = false;
 
-        public MainTableSource(MainTableModel items)
-        {
-            TableData = items.apiData;
-        }
+        //infinite scroll fields
+        private readonly HttpClientAndApiMethods httpClient;
+        private UITableView _tablewView;
+        private int offset;
+        private int limit = 100;
+        private int totalRowCount;
+        private bool isFetching;
 
+        public MainTableSource(MainTableModel items, HttpClientAndApiMethods httpClient)
+        {
+            tableData = items.apiData;
+            totalRowCount = items.totalRows;
+            this.httpClient = httpClient;
+        }
 
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = (MainCell)tableView.DequeueReusableCell(MainTableController.cellIdentifier, indexPath);
+            MainCell cell = (MainCell)tableView.DequeueReusableCell(MainTableController.cellIdentifier, indexPath);
 
-            cell.UpdateCell(TableData[indexPath.Row].question, TableData[indexPath.Row].answer);
+            cell.UpdateCell(tableData[indexPath.Row].question, tableData[indexPath.Row].answer);
 
+            int index = indexPath.Row;
+            int totalTableCount = tableData.Count;
+
+            if (_tablewView == null)
+            _tablewView = tableView;
+
+            if(!isFetching && index > totalTableCount * 0.8 && totalRowCount >= 0 && totalRowCount - totalTableCount > limit)
+            {
+                isFetching = true;
+                Task.Factory.StartNew(LoadMore);
+
+            } else if (!isFetching && index > totalTableCount * 0.8 && totalRowCount > 0 && totalRowCount - totalTableCount < limit)
+            {
+                isFetching = true;
+                Task.Factory.StartNew(LastCall);
+            }
             return cell;
         }
 
-
-        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        private async void LastCall()
         {
-            currentInexPath = indexPath;
-            RowClicked(this, TableData[indexPath.Row]);
-            tableView.DeselectRow(indexPath, true);
+            limit = totalRowCount - tableData.Count;
+            offset = tableData.Count;
+            var moreRows = await httpClient.GetApiData(offset, limit);
+            tableData.AddRange(moreRows.apiData);
+            totalRowCount = tableData.Last().totalRows;
+            InvokeOnMainThread(() => _tablewView.ReloadData());
         }
 
-        //public void UpdateModel(UpdatedDataModel updatedData)
-        //{
-        //    var forUpdate = updatedData.apiData;
-
-        //    TableData[currentInexPath.Row] = updatedData.apiData;
-
-
-        //}
-
+        private async void LoadMore()
+        {
+            //this.pageIndex++;
+            offset = tableData.Count;
+            var moreRows = await httpClient.GetApiData(offset, limit);
+            tableData.AddRange(moreRows.apiData);
+            totalRowCount = tableData.Last().totalRows;
+            InvokeOnMainThread(() => _tablewView.ReloadData());
+            isFetching = false;
+        }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return TableData.Count;
+            return tableData.Count;
         }
 
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
+            currentIndexPath = indexPath;
+            RowClicked(this, tableData[indexPath.Row]);
+            tableView.DeselectRow(indexPath, true);
+        }
 
-        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
+        public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
         {
             switch (editingStyle)
             {
                 case UITableViewCellEditingStyle.Delete:
 
                     //Console.WriteLine("id is {0}", tableData[indexPath.Row].entryid);
-                    DeleteRowClicked(this, TableData[indexPath.Row]);
+                    DeleteRowClicked(this, tableData[indexPath.Row]);
                     if (successIndicator == true)
                     {
-                        TableData.RemoveAt(indexPath.Row);
+                        tableData.RemoveAt(indexPath.Row);
                         tableView.DeleteRows(new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
                     }
                     else

@@ -84,7 +84,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="HttpClientApiMethods.cs" />
+    <Compile Include="HttpClientAndApiMethods.cs" />
     <Compile Include="MainCell.cs" />
     <Compile Include="MainCell.designer.cs">
       <DependentUpon>MainCell.cs</DependentUpon>

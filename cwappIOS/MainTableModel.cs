@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace cwappIOS
 {
@@ -11,6 +9,7 @@ namespace cwappIOS
         public bool success { get; set; }
         public string message { get; set; }
         public string token { get; set; }
+        public int totalRows { get; set; }
         public List<ModelFields> apiData { get; set; }
     }
 
@@ -25,7 +24,7 @@ namespace cwappIOS
         public string updated_at { get; set; }
         public string sessionid { get; set; }
         public int? is_approved { get; set; }
-                
+        public int totalRows { get; set; }
     }
 
 
@@ -57,6 +56,6 @@ namespace cwappIOS
         public object is_approved { get; set; }
     }
 
-    
+
 
 }

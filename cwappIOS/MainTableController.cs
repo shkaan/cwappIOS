@@ -1,13 +1,5 @@
-﻿using CoreAnimation;
-using CoreGraphics;
-using Foundation;
-using Newtonsoft.Json;
+﻿using Foundation;
 using System;
-using System.Collections.Specialized;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using UIKit;
 
 namespace cwappIOS
@@ -15,11 +7,11 @@ namespace cwappIOS
     public partial class MainTableController : UITableViewController
     {
         public static NSString cellIdentifier = new NSString("MainCell");
-        public static MainTableModel mainTableModel;
-        private HttpClient httpClient = new HttpClientApiMethods().GetHttpClient();
+        //private MainTableModel mainTableModel;
+        //private HttpClient httpClient = new HttpClientApiMethods().GetHttpClient();
+        private HttpClientAndApiMethods httpClient = new HttpClientAndApiMethods();
         private ModelFields rowData;
         private MainTableSource activeSourceInstance;
-
         private ModalBackground modal;
 
 
@@ -33,17 +25,18 @@ namespace cwappIOS
         {
             base.ViewDidLoad();
 
-            GetApiData();
+            MainTableModel inititalData = httpClient.GetApiData();
 
-            MainTableView.Source = new MainTableSource(mainTableModel);
+            MainTableView.Source = new MainTableSource(inititalData, httpClient);
+            //GetApiData();
 
+            //MainTableView.Source = new MainTableSource(mainTableModel);
         }
 
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-
         }
 
         public override void ViewDidAppear(bool animated)
@@ -69,7 +62,7 @@ namespace cwappIOS
             MainTableSource.DeleteRowClicked += (object sender, ModelFields data) =>
             {
 
-                bool deleted = DeleteRow(data.entryid);
+                bool deleted = httpClient.DeleteRow(data.entryid);
 
                 if (deleted == true)
                 {
@@ -96,53 +89,34 @@ namespace cwappIOS
                 var sendData = new SendFields();
                 sendData.question = modal.qField.Text;
                 sendData.answer = modal.aField.Text;
-                var jsonData = new StringContent(JsonConvert.SerializeObject(sendData).ToString(), Encoding.UTF8, "application/json");
 
+                MainTableModel result = httpClient.SendEditedFields(sendData, rowData.entryid);
 
-                var response = httpClient.PostAsync("api/editRow/" + rowData.entryid, jsonData).Result;
-
-                if (response.IsSuccessStatusCode)
+                if (result.success == true)
                 {
-                    var apiResponse = response.Content.ReadAsStringAsync().Result;
-                    var updatedData = JsonConvert.DeserializeObject<MainTableModel>(apiResponse);
-
-                    if (updatedData.success == true)
-                    {
-                        modal.Hide();
-                        activeSourceInstance.TableData[activeSourceInstance.currentInexPath.Row] = updatedData.apiData[0];
-                        MainTableView.ReloadData();
-                        MainTableView.ScrollEnabled = true;
-                    }
-                    else
-                    {
-                        new UIAlertView("Error", updatedData.message, null, "Back", null).Show();
-                    }
-
-
+                    modal.Hide();
+                    activeSourceInstance.tableData[activeSourceInstance.currentIndexPath.Row] = result.apiData[0];
+                    MainTableView.ReloadData();
+                    MainTableView.ScrollEnabled = true;
                 }
-            }
-        }
+                else
+                {
+                    new UIAlertView("Error", result.message, null, "Back", null).Show();
+                }
+
+                //var jsonData = new StringContent(JsonConvert.SerializeObject(sendData).ToString(), Encoding.UTF8, "application/json");
+
+
+                //var response = httpClient.PostAsync("api/editRow/" + rowData.entryid, jsonData).Result;
+
+                //if (response.IsSuccessStatusCode)
+                //{
+                //var apiResponse = response.Content.ReadAsStringAsync().Result;
+                //var updatedData = JsonConvert.DeserializeObject<MainTableModel>(apiResponse);
 
 
 
-        public override void DidReceiveMemoryWarning()
-        {
-            base.DidReceiveMemoryWarning();
-        }
-
-
-
-        private void GetApiData()
-        {
-            string queryString = GetQueryString("0", "100");
-
-            var apiResponse = httpClient.GetAsync("api/userEntries" + "?" + queryString).Result;//"?token=" + _token.token);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                var responseContent = apiResponse.Content;
-                string jsonString = responseContent.ReadAsStringAsync().Result;
-                mainTableModel = JsonConvert.DeserializeObject<MainTableModel>(jsonString);
+                //}
             }
         }
 
@@ -154,32 +128,56 @@ namespace cwappIOS
         }
 
 
-
-        private bool DeleteRow(int id)
+        public override void DidReceiveMemoryWarning()
         {
-            //Console.WriteLine("row id is: " + id);
-
-            var apiResponse = httpClient.DeleteAsync("api/deleteRow/" + id).Result;
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                var responseContent = apiResponse.Content.ReadAsStringAsync().Result;
-                var convertedData = JsonConvert.DeserializeObject<MainTableModel>((string)responseContent);
-                return convertedData.success;
-            }
-            return false;
+            base.DidReceiveMemoryWarning();
         }
 
 
-        private string GetQueryString(string offsetValue, string limitValue)
-        {
-            NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
 
-            queryString["offset"] = offsetValue;
-            queryString["limit"] = limitValue;
-            //queryString["token"] = token;
+        //private void GetApiData()
+        //{
+        //    string queryString = GetQueryString("0", "100");
 
-            return queryString.ToString();
-        }
+        //    var apiResponse = httpClient.GetAsync("api/userEntries" + "?" + queryString).Result;//"?token=" + _token.token);
+
+        //    if (apiResponse.IsSuccessStatusCode)
+        //    {
+        //        var responseContent = apiResponse.Content;
+        //        string jsonString = responseContent.ReadAsStringAsync().Result;
+        //        mainTableModel = JsonConvert.DeserializeObject<MainTableModel>(jsonString);
+        //    }
+        //}
+
+
+
+
+
+        //private bool DeleteRow(int id)
+        //{
+        //    //Console.WriteLine("row id is: " + id);
+
+        //    var apiResponse = httpClient.DeleteAsync("api/deleteRow/" + id).Result;
+
+        //    if (apiResponse.IsSuccessStatusCode)
+        //    {
+        //        var responseContent = apiResponse.Content.ReadAsStringAsync().Result;
+        //        var convertedData = JsonConvert.DeserializeObject<MainTableModel>(responseContent);
+        //        return convertedData.success;
+        //    }
+        //    return false;
+        //}
+
+
+        //private string GetQueryString(string offsetValue, string limitValue)
+        //{
+        //    NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
+
+        //    queryString["offset"] = offsetValue;
+        //    queryString["limit"] = limitValue;
+        //    //queryString["token"] = token;
+
+        //    return queryString.ToString();
+        //}
     }
 }

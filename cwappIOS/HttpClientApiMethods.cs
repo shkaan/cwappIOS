@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
+using UIKit;
 
 namespace cwappIOS
 {
@@ -18,7 +19,7 @@ namespace cwappIOS
         {
             var httpClient = new HttpClient(new NativeMessageHandler());
 
-            httpClient.BaseAddress = new Uri("http://192.168.1.101:3000/");
+            httpClient.BaseAddress = new Uri("http://192.168.1.101:3000/" /*"http://www.ukrstenica.com"*/);
             //httpClient.Timeout = new TimeSpan(0,0,5);
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -48,6 +49,7 @@ namespace cwappIOS
                     }
                     else
                     {
+                        new UIAlertView("Error", "Server Error", null, "Back", null).Show();
                         return false;
                     }
                 }
