@@ -41,41 +41,48 @@ namespace cwappIOS
 
         public override void ViewDidAppear(bool animated)
         {
+
             base.ViewDidAppear(animated);
-            MainTableSource.RowClicked += (object sender, ModelFields data) =>
-            {
-                MainTableView.ScrollEnabled = false;
-
-                var bounds = View.Bounds;
-                rowData = data as ModelFields;
-                activeSourceInstance = sender as MainTableSource;
-
-                modal = new ModalBackground(bounds);
-                modal.qField.Text = rowData.question;
-                modal.aField.Text = rowData.answer;
-                View.AddSubview(modal);
-
-                modal.submitButton.TouchUpInside += SubmitEditedFields;
-                modal.cancelButton.TouchUpInside += cancelEditing;
-            };
-
-            MainTableSource.DeleteRowClicked += (object sender, ModelFields data) =>
-            {
-
-                bool deleted = httpClient.DeleteRow(data.entryid);
-
-                if (deleted == true)
-                {
-                    MainTableSource.successIndicator = true;
-                    Console.WriteLine("ITS TRUE!");
-                }
-                else
-                {
-                    MainTableSource.successIndicator = false;
-                    Console.WriteLine("Bedak");
-                }
-            };
+            MainTableSource.RowClicked -= OnRowClicked;
+            MainTableSource.RowClicked += OnRowClicked;
+            MainTableSource.DeleteRowClicked -= OnDeleteRowClicked;
+            MainTableSource.DeleteRowClicked += OnDeleteRowClicked;
         }
+
+        private void OnRowClicked(object sender, ModelFields e)
+        {
+            MainTableView.ScrollEnabled = false;
+
+            var bounds = View.Bounds;
+            rowData = e as ModelFields;
+            activeSourceInstance = sender as MainTableSource;
+
+            modal = new ModalBackground(bounds);
+            modal.qField.Text = rowData.question;
+            modal.aField.Text = rowData.answer;
+            View.AddSubview(modal);
+
+            modal.submitButton.TouchUpInside += SubmitEditedFields;
+            modal.cancelButton.TouchUpInside += cancelEditing;
+        }
+
+        private void OnDeleteRowClicked(object sender, ModelFields e)
+        {
+            bool deleted = httpClient.DeleteRow(e.entryid);
+
+            if (deleted == true)
+            {
+                MainTableSource.successIndicator = true;
+                Console.WriteLine("ITS TRUE!");
+            }
+            else
+            {
+                MainTableSource.successIndicator = false;
+                Console.WriteLine("Bedak");
+            }
+        }
+
+        
 
         private void SubmitEditedFields(object sender, EventArgs e)
         {
@@ -104,19 +111,6 @@ namespace cwappIOS
                     new UIAlertView("Error", result.message, null, "Back", null).Show();
                 }
 
-                //var jsonData = new StringContent(JsonConvert.SerializeObject(sendData).ToString(), Encoding.UTF8, "application/json");
-
-
-                //var response = httpClient.PostAsync("api/editRow/" + rowData.entryid, jsonData).Result;
-
-                //if (response.IsSuccessStatusCode)
-                //{
-                //var apiResponse = response.Content.ReadAsStringAsync().Result;
-                //var updatedData = JsonConvert.DeserializeObject<MainTableModel>(apiResponse);
-
-
-
-                //}
             }
         }
 
@@ -132,52 +126,54 @@ namespace cwappIOS
         {
             base.DidReceiveMemoryWarning();
         }
-
-
-
-        //private void GetApiData()
-        //{
-        //    string queryString = GetQueryString("0", "100");
-
-        //    var apiResponse = httpClient.GetAsync("api/userEntries" + "?" + queryString).Result;//"?token=" + _token.token);
-
-        //    if (apiResponse.IsSuccessStatusCode)
-        //    {
-        //        var responseContent = apiResponse.Content;
-        //        string jsonString = responseContent.ReadAsStringAsync().Result;
-        //        mainTableModel = JsonConvert.DeserializeObject<MainTableModel>(jsonString);
-        //    }
-        //}
-
-
-
-
-
-        //private bool DeleteRow(int id)
-        //{
-        //    //Console.WriteLine("row id is: " + id);
-
-        //    var apiResponse = httpClient.DeleteAsync("api/deleteRow/" + id).Result;
-
-        //    if (apiResponse.IsSuccessStatusCode)
-        //    {
-        //        var responseContent = apiResponse.Content.ReadAsStringAsync().Result;
-        //        var convertedData = JsonConvert.DeserializeObject<MainTableModel>(responseContent);
-        //        return convertedData.success;
-        //    }
-        //    return false;
-        //}
-
-
-        //private string GetQueryString(string offsetValue, string limitValue)
-        //{
-        //    NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
-
-        //    queryString["offset"] = offsetValue;
-        //    queryString["limit"] = limitValue;
-        //    //queryString["token"] = token;
-
-        //    return queryString.ToString();
-        //}
     }
+
+
+
+
+
+    //private void GetApiData()
+    //{
+    //    string queryString = GetQueryString("0", "100");
+
+    //    var apiResponse = httpClient.GetAsync("api/userEntries" + "?" + queryString).Result;//"?token=" + _token.token);
+
+    //    if (apiResponse.IsSuccessStatusCode)
+    //    {
+    //        var responseContent = apiResponse.Content;
+    //        string jsonString = responseContent.ReadAsStringAsync().Result;
+    //        mainTableModel = JsonConvert.DeserializeObject<MainTableModel>(jsonString);
+    //    }
+    //}
+
+
+
+
+
+    //private bool DeleteRow(int id)
+    //{
+    //    //Console.WriteLine("row id is: " + id);
+
+    //    var apiResponse = httpClient.DeleteAsync("api/deleteRow/" + id).Result;
+
+    //    if (apiResponse.IsSuccessStatusCode)
+    //    {
+    //        var responseContent = apiResponse.Content.ReadAsStringAsync().Result;
+    //        var convertedData = JsonConvert.DeserializeObject<MainTableModel>(responseContent);
+    //        return convertedData.success;
+    //    }
+    //    return false;
+    //}
+
+
+    //private string GetQueryString(string offsetValue, string limitValue)
+    //{
+    //    NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
+
+    //    queryString["offset"] = offsetValue;
+    //    queryString["limit"] = limitValue;
+    //    //queryString["token"] = token;
+
+    //    return queryString.ToString();
+    //}
 }

@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
@@ -24,15 +24,15 @@
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="51" y="220" width="281" height="30"/>
                                     <mask key="constraints">
-                                        <include reference="17"/>
+                                        <include reference="1496"/>
                                     </mask>
                                 </variation>
                                 <constraints>
-                                    <constraint id="17" firstAttribute="width" constant="281"/>
+                                    <constraint id="1496" firstAttribute="width" secondItem="3" secondAttribute="height" multiplier="281:30"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="17"/>
+                                        <exclude reference="1496"/>
                                     </mask>
                                 </variation>
                             </textField>
@@ -43,19 +43,16 @@
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="73" y="149" width="237" height="63"/>
                                     <mask key="constraints">
-                                        <include reference="33"/>
-                                        <include reference="34"/>
+                                        <include reference="1492"/>
                                     </mask>
                                 </variation>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <constraints>
-                                    <constraint id="33" firstAttribute="width" constant="237"/>
-                                    <constraint id="34" firstAttribute="height" constant="63"/>
+                                    <constraint id="1492" firstAttribute="width" secondItem="7" secondAttribute="height" multiplier="79:21"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="33"/>
-                                        <exclude reference="34"/>
+                                        <exclude reference="1492"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -66,15 +63,15 @@
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="51" y="268" width="281" height="30"/>
                                     <mask key="constraints">
-                                        <include reference="20"/>
+                                        <include reference="1500"/>
                                     </mask>
                                 </variation>
                                 <constraints>
-                                    <constraint id="20" firstAttribute="width" constant="281"/>
+                                    <constraint id="1500" firstAttribute="width" secondItem="8" secondAttribute="height" multiplier="281:30"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="20"/>
+                                        <exclude reference="1500"/>
                                     </mask>
                                 </variation>
                             </textField>
@@ -83,25 +80,22 @@
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <rect key="frame" x="51" y="318" width="281" height="30"/>
                                     <mask key="constraints">
-                                        <include reference="27"/>
-                                        <include reference="28"/>
+                                        <include reference="1505"/>
                                     </mask>
                                 </variation>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Submit"/>
-                                <constraints>
-                                    <constraint id="27" firstAttribute="width" constant="281"/>
-                                    <constraint id="28" firstAttribute="height" constant="30"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="27"/>
-                                        <exclude reference="28"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <action selector="SubmitButton_TouchUpInside:" destination="BYZ-38-t0r" id="210" eventType="touchUpInside"/>
                                 </connections>
+                                <constraints>
+                                    <constraint id="1505" firstAttribute="width" secondItem="11" secondAttribute="height" multiplier="281:30"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1505"/>
+                                    </mask>
+                                </variation>
                             </button>
                         </subviews>
                         <variation key="default">
@@ -112,14 +106,18 @@
                                 <exclude reference="11"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="15"/>
-                                <exclude reference="16"/>
-                                <exclude reference="18"/>
-                                <exclude reference="19"/>
-                                <exclude reference="25"/>
-                                <exclude reference="26"/>
-                                <exclude reference="31"/>
-                                <exclude reference="32"/>
+                                <exclude reference="1489"/>
+                                <exclude reference="1490"/>
+                                <exclude reference="1491"/>
+                                <exclude reference="1493"/>
+                                <exclude reference="1494"/>
+                                <exclude reference="1495"/>
+                                <exclude reference="1497"/>
+                                <exclude reference="1498"/>
+                                <exclude reference="1499"/>
+                                <exclude reference="1502"/>
+                                <exclude reference="1503"/>
+                                <exclude reference="1504"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -130,25 +128,33 @@
                                 <include reference="11"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="15"/>
-                                <include reference="16"/>
-                                <include reference="18"/>
-                                <include reference="19"/>
-                                <include reference="25"/>
-                                <include reference="26"/>
-                                <include reference="31"/>
-                                <include reference="32"/>
+                                <include reference="1489"/>
+                                <include reference="1490"/>
+                                <include reference="1491"/>
+                                <include reference="1493"/>
+                                <include reference="1494"/>
+                                <include reference="1495"/>
+                                <include reference="1497"/>
+                                <include reference="1498"/>
+                                <include reference="1499"/>
+                                <include reference="1502"/>
+                                <include reference="1503"/>
+                                <include reference="1504"/>
                             </mask>
                         </variation>
                         <constraints>
-                            <constraint id="15" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="43"/>
-                            <constraint id="16" firstItem="3" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="220"/>
-                            <constraint id="18" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="8" secondAttribute="trailing" constant="43"/>
-                            <constraint id="19" firstItem="8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="268"/>
-                            <constraint id="25" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="11" secondAttribute="trailing" constant="43"/>
-                            <constraint id="26" firstItem="11" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="318"/>
-                            <constraint id="31" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="65"/>
-                            <constraint id="32" firstItem="7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="149"/>
+                            <constraint id="1489" firstItem="7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="129"/>
+                            <constraint id="1490" firstItem="7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="73"/>
+                            <constraint id="1491" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" constant="65"/>
+                            <constraint id="1493" firstItem="3" firstAttribute="top" secondItem="7" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1494" firstItem="3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="51"/>
+                            <constraint id="1495" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="43"/>
+                            <constraint id="1497" firstItem="8" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="18"/>
+                            <constraint id="1498" firstItem="8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="51"/>
+                            <constraint id="1499" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="8" secondAttribute="trailing" constant="43"/>
+                            <constraint id="1502" firstItem="11" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="20"/>
+                            <constraint id="1503" firstItem="11" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="51"/>
+                            <constraint id="1504" firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="11" secondAttribute="trailing" constant="43"/>
                         </constraints>
                     </view>
                     <connections>
@@ -166,7 +172,7 @@
             <objects>
                 <navigationController id="48" sceneMemberID="viewController" storyboardIdentifier="NavigationController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="50">
-                        <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="667" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -182,18 +188,18 @@
                 <tableViewController id="1263" sceneMemberID="viewController" customClass="TestTableController" storyboardIdentifier="TestTableController" hasRefreshControl="0">
                     <navigationItem title="Crosswords DB Main" id="1452" key="navigationItem"/>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="1457" key="view">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="1458" rowHeight="60" reuseIdentifier="MainCell" customClass="MainCell">
-                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="28" width="667" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <connections>
                                     <outlet property="qLabel" destination="1461" id="name-outlet-1461"/>
                                     <outlet property="aLabel" destination="1465" id="name-outlet-1465"/>
                                 </connections>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1458" id="1459">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="667" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1461" translatesAutoresizingMaskIntoConstraints="NO">
@@ -287,5 +293,6 @@
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina47"/>
+        <simulatedOrientationMetrics key="orientation"/>
     </simulatedMetricsContainer>
 </document>

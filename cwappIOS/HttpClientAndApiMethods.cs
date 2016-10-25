@@ -105,7 +105,6 @@ namespace cwappIOS
                 var apiResponse = response.Content.ReadAsStringAsync().Result;
                 updatedData = JsonConvert.DeserializeObject<MainTableModel>(apiResponse);
                 return updatedData;
-
             }
             updatedData.success = false;
             updatedData.message = "Server Error";

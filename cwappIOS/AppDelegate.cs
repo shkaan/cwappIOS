@@ -95,6 +95,8 @@ namespace cwappIOS
         void LoginViewController_OnLoginSuccess(object sender, EventArgs e)
         {
             //We have successfully Logged In
+            HttpClientAndApiMethods.OnLoginSuccess -= LoginViewController_OnLoginSuccess;
+
             var navigationController = GetViewController(MainStoryboard, "NavigationController");
             SetRootViewController(navigationController, true);
         }
