@@ -16,6 +16,10 @@ namespace cwappIOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton adminButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITableView MainTableView { get; set; }
 
         [Outlet]
@@ -24,6 +28,11 @@ namespace cwappIOS
 
         void ReleaseDesignerOutlets ()
         {
+            if (adminButton != null) {
+                adminButton.Dispose ();
+                adminButton = null;
+            }
+
             if (MainTableView != null) {
                 MainTableView.Dispose ();
                 MainTableView = null;

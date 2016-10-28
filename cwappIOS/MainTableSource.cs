@@ -17,10 +17,11 @@ namespace cwappIOS
 
         //infinite scroll fields
         private readonly HttpClientAndApiMethods httpClient;
-        private UITableView _tablewView;
-        private int offset;
+        private UITableView _tableView;
+        private int offset = 0;
         private int limit = 100;
         private int totalRowCount;
+        //private int totalTableCount = 0;
         private bool isFetching;
 
         public MainTableSource(MainTableModel items, HttpClientAndApiMethods httpClient)
@@ -40,20 +41,32 @@ namespace cwappIOS
             int index = indexPath.Row;
             int totalTableCount = tableData.Count;
 
-            if (_tablewView == null)
-            _tablewView = tableView;
+            if (_tableView == null)
+            _tableView = tableView;
 
-            if(!isFetching && index > totalTableCount * 0.8 && totalRowCount >= 0 && totalRowCount - totalTableCount > limit)
+            if(!isFetching && index >= totalTableCount * 0.8 && totalRowCount >= 0 && totalRowCount - totalTableCount >= limit)
             {
                 isFetching = true;
                 Task.Factory.StartNew(LoadMore);
 
-            } else if (!isFetching && index > totalTableCount * 0.8 && totalRowCount > 0 && totalRowCount - totalTableCount < limit)
+            } else if (!isFetching && index >= totalTableCount * 0.8 && totalRowCount > 0 && totalRowCount - totalTableCount < limit)
             {
                 isFetching = true;
                 Task.Factory.StartNew(LastCall);
             }
             return cell;
+        }
+
+
+        private async void LoadMore()
+        {
+            //this.pageIndex++;
+            offset = tableData.Count;
+            var moreRows = await httpClient.GetApiData(offset, limit);
+            tableData.AddRange(moreRows.apiData);
+            totalRowCount = tableData.Last().totalRows;
+            InvokeOnMainThread(() => _tableView.ReloadData());
+            isFetching = false;
         }
 
 
@@ -64,24 +77,15 @@ namespace cwappIOS
             var moreRows = await httpClient.GetApiData(offset, limit);
             tableData.AddRange(moreRows.apiData);
             totalRowCount = tableData.Last().totalRows;
-            InvokeOnMainThread(() => _tablewView.ReloadData());
+            InvokeOnMainThread(() => _tableView.ReloadData());
         }
 
-        private async void LoadMore()
-        {
-            //this.pageIndex++;
-            offset = tableData.Count;
-            var moreRows = await httpClient.GetApiData(offset, limit);
-            tableData.AddRange(moreRows.apiData);
-            totalRowCount = tableData.Last().totalRows;
-            InvokeOnMainThread(() => _tablewView.ReloadData());
-            isFetching = false;
-        }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
             return tableData.Count;
         }
+
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
@@ -89,6 +93,7 @@ namespace cwappIOS
             RowClicked(this, tableData[indexPath.Row]);
             tableView.DeselectRow(indexPath, true);
         }
+
 
         public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
         {
@@ -113,10 +118,13 @@ namespace cwappIOS
                     break;
             }
         }
+
+
         public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
         {
             return true; // return false if you wish to disable editing for a specific indexPath or for all rows
         }
+
 
         public override bool CanMoveRow(UITableView tableView, NSIndexPath indexPath)
         {
